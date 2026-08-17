@@ -1,12 +1,17 @@
+
 <?php
 
 include "infra/conexao.php";
-$pratos = mysqli_query($conexao, "SELECT * FROM pratos");
+$sqlPratos = "SELECT pratos.*, usuarios.nomeusuario 
+              FROM pratos 
+              LEFT JOIN usuarios ON pratos.usuario_id = usuarios.id";
+$pratos = mysqli_query($conexao, $sqlPratos);
 
+$usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -20,35 +25,49 @@ $pratos = mysqli_query($conexao, "SELECT * FROM pratos");
         <h1>CRUD - Livraria</h1>
     </header>
     <main>
-        <h2>Adicione um novo Usuario!</h2>
+        <h2>Adicione um novo Usuário!</h2>
         <form action="public/cadastrar_usuarios.php" method="POST">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome">
+            <label for="nomeusuario">Nome:</label>
+            <input type="text" name="nomeusuario" required>
             <br>
             <label for="email">Email:</label>
-            <input type="email" name="email">
+            <input type="email" name="email" required>
             <br>
             <button type="submit">Cadastrar</button>
         </form>
+
+        <h2>Adicione um novo Prato!</h2>
         <form action="public/cadastrar_pratos.php" method="POST">
+            <label for="usuario_id">Usuário Responsável:</label>
+            <select name="usuario_id" id="usuario_id" required>
+                <option value="">Selecione um usuário...</option>
+                <?php while ($usuario = mysqli_fetch_assoc($usuarios)) { ?>
+                    <option value="<?php echo $usuario['id']; ?>">
+                        <?php echo $usuario['nomeusuario']; ?>
+                    </option>
+                <?php } ?>
+            </select>
+            <br>
             <label for="nomeprato">Nome:</label>
-            <input type="text" name="nomeprato">
+            <input type="text" name="nomeprato" required>
             <br>
             <label for="descricao">Descrição</label>
-            <input type=text" name="descricao">
+            <input type="text" name="descricao" required>
             <br>
             <label for="preco">Preço: </label>
-            <input type="number" step="0.01" name="preco">
+            <input type="number" step="0.01" name="preco" required>
             <br>
             <label for="categoria">Categoria</label>
-            <input type=text" name="categoria">
+            <input type="text" name="categoria" required>
             <br>
             <button type="submit">Cadastrar</button>
         </form>
+
         <div>
             <h2>Pratos Cadastrados</h2>
-            <table>
+            <table border="1">
                 <tr>
+                    <th>Usuário</th>
                     <th>ID</th>
                     <th>Nome</th>
                     <th>Descrição</th>
@@ -58,26 +77,24 @@ $pratos = mysqli_query($conexao, "SELECT * FROM pratos");
                 </tr>
                 <?php while ($prato = mysqli_fetch_assoc($pratos)) { ?>
                     <tr>
-                        <td><?php echo $prato["id"] ?></td>
-                        <td><?php echo $prato["nome"] ?></td>
-                        <td><?php echo $prato["descricao"] ?></td>
-                        <td><?php echo $prato["preco"] ?></td>
-                        <td><?php echo $prato["categoria"] ?></td>
+                        <td><?php echo $prato["nomeusuario"] ?? 'Sem usuário'; ?></td>
+                        <td><?php echo $prato["id"]; ?></td>
+                        <td><?php echo $prato["nome"]; ?></td>
+                        <td><?php echo $prato["descricao"]; ?></td>
+                        <td><?php echo $prato["preco"]; ?></td>
+                        <td><?php echo $prato["categoria"]; ?></td>
                         <td>
-                            <a href="public/editar.php?id=<?php echo $prato["id"] ?>">Editar</a>
-                            <a href="public/excluir.php?id=<?php echo $prato["id"] ?>">Excluir</a>
+                            <a href="public/editar.php?id=<?php echo $prato["id"]; ?>">Editar</a>
+                            <a href="public/excluir.php?id=<?php echo $prato["id"]; ?>">Excluir</a>
                         </td>
                     </tr>
                 <?php } ?>
             </table>
         </div>
-
     </main>
-    <footer>
-
-    </footer>
-
-
+    <footer></footer>
 </body>
 
 </html>
+
+```

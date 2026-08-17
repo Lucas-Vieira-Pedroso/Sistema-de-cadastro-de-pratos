@@ -6,10 +6,12 @@ CREATE TABLE pratos (
     nome VARCHAR(200) NOT NULL,
     descricao VARCHAR(100)NOT NULL,
     preco INT NOT NULL,
-    categoria VARCHAR(100) NOT NULL
+    categoria VARCHAR(100) NOT NULL,
+    FOREIGN KEY ('nomeusuario')
+
 );
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(200) NOT NULL,
+    nomeusuario VARCHAR(200) NOT NULL,
     email VARCHAR(200) NOT NULL
 );
