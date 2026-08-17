@@ -1,0 +1,15 @@
+CREATE DATABASE pratos_m1;
+USE pratos_m1;
+
+CREATE TABLE pratos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(200) NOT NULL,
+    descricao VARCHAR(100)NOT NULL,
+    preco INT NOT NULL,
+    categoria VARCHAR(100) NOT NULL
+);
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(200) NOT NULL,
+    email VARCHAR(200) NOT NULL,
+);
