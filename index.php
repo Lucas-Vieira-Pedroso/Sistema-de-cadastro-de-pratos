@@ -1,7 +1,7 @@
 <?php
 
 include "infra/conexao.php";
-$pratos = mysqli_query($conexao, "SELECT * FROM livros");
+$pratos = mysqli_query($conexao, "SELECT * FROM pratos");
 
 ?>
 
@@ -21,24 +21,24 @@ $pratos = mysqli_query($conexao, "SELECT * FROM livros");
     </header>
     <main>
         <h2>Adicione um novo Usuario!</h2>
-        <form action="public/cadastrar.php" method="POST">
+        <form action="public/cadastrar_usuarios.php" method="POST">
             <label for="nome">Nome:</label>
             <input type="text" name="nome">
             <br>
             <label for="email">Email:</label>
-            <input type=email" name="email">
+            <input type="email" name="email">
             <br>
             <button type="submit">Cadastrar</button>
         </form>
-        <form action="public/cadastrar.php" method="POST">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome">
+        <form action="public/cadastrar_pratos.php" method="POST">
+            <label for="nomeprato">Nome:</label>
+            <input type="text" name="nomeprato">
             <br>
             <label for="descricao">Descrição</label>
             <input type=text" name="descricao">
             <br>
             <label for="preco">Preço: </label>
-            <input type=number" step="0.01" name="preco">
+            <input type="number" step="0.01" name="preco">
             <br>
             <label for="categoria">Categoria</label>
             <input type=text" name="categoria">
@@ -59,10 +59,10 @@ $pratos = mysqli_query($conexao, "SELECT * FROM livros");
                 <?php while ($prato = mysqli_fetch_assoc($pratos)) { ?>
                     <tr>
                         <td><?php echo $prato["id"] ?></td>
-                        <td><?php echo $prato["Nome"] ?></td>
+                        <td><?php echo $prato["nome"] ?></td>
                         <td><?php echo $prato["descricao"] ?></td>
-                        <td><?php echo $prato["Preco"] ?></td>
-                        <td><?php echo $prato["Categoria"] ?></td>
+                        <td><?php echo $prato["preco"] ?></td>
+                        <td><?php echo $prato["categoria"] ?></td>
                         <td>
                             <a href="public/editar.php?id=<?php echo $prato["id"] ?>">Editar</a>
                             <a href="public/excluir.php?id=<?php echo $prato["id"] ?>">Excluir</a>
