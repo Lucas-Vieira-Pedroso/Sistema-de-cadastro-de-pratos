@@ -92,8 +92,8 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
                 
                              
             </table>
-            <a href="public/pertence.php?id=<?php echo $prato["id_pratos"]; ?>">procurar</a>
         </div>
+        <a href="public/pertence.php">procurar</a>
     </main>
     <footer></footer>
 </body>
