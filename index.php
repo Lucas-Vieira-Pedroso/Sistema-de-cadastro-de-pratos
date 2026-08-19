@@ -2,9 +2,9 @@
 <?php
 
 include "infra/conexao.php";
-$sqlPratos = "SELECT pratos.*, usuarios.nomeusuario 
+$sqlPratos = "SELECT pratos.*, usuarios.nome 
               FROM pratos 
-              LEFT JOIN usuarios ON pratos.usuario_id = usuarios.id";
+              LEFT JOIN usuarios ON pratos.id = usuarios.id";
 $pratos = mysqli_query($conexao, $sqlPratos);
 
 $usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
@@ -43,7 +43,7 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
                 <option value="">Selecione um usuário...</option>
                 <?php while ($usuario = mysqli_fetch_assoc($usuarios)) { ?>
                     <option value="<?php echo $usuario['id']; ?>">
-                        <?php echo $usuario['nomeusuario']; ?>
+                        <?php echo $usuario['nome']; ?>
                     </option>
                 <?php } ?>
             </select>
@@ -77,7 +77,7 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
                 </tr>
                 <?php while ($prato = mysqli_fetch_assoc($pratos)) { ?>
                     <tr>
-                        <td><?php echo $prato["nomeusuario"] ?? 'Sem usuário'; ?></td>
+                        <td><?php echo $prato["nome"] ?? 'Sem usuário'; ?></td>
                         <td><?php echo $prato["id"]; ?></td>
                         <td><?php echo $prato["nome"]; ?></td>
                         <td><?php echo $prato["descricao"]; ?></td>

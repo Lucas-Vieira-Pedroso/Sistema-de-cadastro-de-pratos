@@ -3,7 +3,7 @@ USE pratos_m1;
 
 CREATE TABLE IF NOT EXISTS usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nomeusuario VARCHAR(200) NOT NULL,
+    nome VARCHAR(200) NOT NULL,
     email VARCHAR(200) NOT NULL
 );
 
