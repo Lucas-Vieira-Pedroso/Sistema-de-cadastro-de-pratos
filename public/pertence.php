@@ -1,7 +1,7 @@
 <?php
 include "../infra/conexao.php";
 
-$usuarios = mysqli_query($conexao, "SELECT id_usuario, nome_usuario FROM usuarios ORDER BY nome_usuario");
+$usuarios = mysqli_query($conexao, "SELECT id_usuario, nome_usuario FROM usuarios");
 
 $id_usuario_selecionado = isset($_GET["id_usuario"]) ? (int) $_GET["id_usuario"] : 0;
 $pratos = false;
