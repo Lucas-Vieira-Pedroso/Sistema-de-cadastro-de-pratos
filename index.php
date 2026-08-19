@@ -93,7 +93,7 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
                              
             </table>
         </div>
-        <a href="public/pertence.php">procurar</a>
+        <button><a href="public/pertence.php">procurar</a></button>
     </main>
     <footer></footer>
 </body>

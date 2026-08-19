@@ -72,7 +72,7 @@ if ($id_usuario_selecionado > 0) {
             <?php } ?>
             <?php } ?>
         </table>
-    <?php ?>
+    <button><a href="../index.php">Voltar</a></button>
 </body>
 
 </html>
