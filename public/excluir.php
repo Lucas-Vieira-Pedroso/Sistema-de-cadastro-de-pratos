@@ -1,6 +1,6 @@
 <?php
 include "../infra/conexao.php";
-$id_pratos = $_GET["id_pratos"];
+$id_pratos = $_GET["id"];
 $sql = "DELETE FROM pratos WHERE id_pratos=?";
 if($stmt = $conexao->prepare($sql)){
     $stmt-> bind_param("i", $id_pratos);

@@ -3,7 +3,7 @@
 include "../infra/conexao.php";
 
 
-$nome_usuario = $_POST["nome_usuario"];
+$nome_usuario = $_POST["nome"];
 $email = $_POST["email"];
 
 $sql = "INSERT INTO usuarios (nome_usuario,email) VALUES (?,?)";

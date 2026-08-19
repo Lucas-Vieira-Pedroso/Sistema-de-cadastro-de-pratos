@@ -2,7 +2,7 @@
 
 include "../infra/conexao.php";
 
-$id_pratos = $_GET["id_pratos"];
+$id_pratos = $_GET["id"];
 $sql = "SELECT * FROM pratos WHERE id_pratos = ?";
 if ($stmt = $conexao->prepare($sql)) {
     $stmt->bind_param("i", $id_pratos);
@@ -35,7 +35,7 @@ if ($stmt = $conexao->prepare($sql)) {
             <?php echo $prato["nome_prato"] ?>!
         </h2>
         <form action="atualizar.php" method="POST">
-            <input type="hidden" name="id_pratos" value="<?php echo $prato["id"] ?>">
+            <input type="hidden" name="id_pratos" value="<?php echo $prato["id_pratos"] ?>">
 
             <label for="nome_prato">Nome: </label>
             <input type="text" name="nome_prato" value="<?php echo $prato["nome_prato"] ?>">

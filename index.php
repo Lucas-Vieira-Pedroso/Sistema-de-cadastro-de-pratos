@@ -2,7 +2,7 @@
 <?php
 
 include "infra/conexao.php";
-$sqlPratos = "SELECT pratos.*, usuarios.nome_usuario 
+$sqlPratos = "SELECT pratos.*, usuarios.nome_usuario
               FROM pratos 
               LEFT JOIN usuarios ON pratos.id_pratos = usuarios.id_usuario";
 $pratos = mysqli_query($conexao, $sqlPratos);
@@ -27,8 +27,8 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
     <main>
         <h2>Adicione um novo Usuário!</h2>
         <form action="public/cadastrar_usuarios.php" method="POST">
-            <label for="nome_usuario">Nome:</label>
-            <input type="text" name="nome_usuario" required>
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" required>
             <br>
             <label for="email">Email:</label>
             <input type="email" name="email" required>
@@ -39,7 +39,7 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
         <h2>Adicione um novo Prato!</h2>
         <form action="public/cadastrar_pratos.php" method="POST">
             <label for="id_usuario">Usuário Responsável:</label>
-            <select name="id_usuario" id="id_usuario" required>
+            <select name="id_usuario" id="id" required>
                 <option value="">Selecione um usuário...</option>
                 <?php while ($usuario = mysqli_fetch_assoc($usuarios)) { ?>
                     <option value="<?php echo $usuario['id_usuario']; ?>">
@@ -77,7 +77,7 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
                 </tr>
                 <?php while ($prato = mysqli_fetch_assoc($pratos)) { ?>
                     <tr>
-                        <td><?php echo $prato["nome_usuario"] ?? 'Sem usuário'; ?></td>
+                        <td><?php echo $usuario["nome"] ?? 'Sem usuário'; ?></td>
                         <td><?php echo $prato["id_pratos"]; ?></td>
                         <td><?php echo $prato["nome_prato"]; ?></td>
                         <td><?php echo $prato["descricao"]; ?></td>
@@ -89,7 +89,10 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
                         </td>
                     </tr>
                 <?php } ?>
+                
+                             
             </table>
+            <a href="public/pertence.php?id=<?php echo $prato["id_pratos"]; ?>">procurar</a>
         </div>
     </main>
     <footer></footer>
