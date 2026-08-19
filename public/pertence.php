@@ -10,8 +10,7 @@ if ($id_usuario_selecionado > 0) {
     $sql = "SELECT pratos.*, usuarios.nome_usuario
             FROM pratos
             INNER JOIN usuarios ON pratos.id_usuario = usuarios.id_usuario
-            WHERE pratos.id_usuario = ?
-            ORDER BY pratos.nome_prato";
+            WHERE pratos.id_usuario = ?";
 
     if ($stmt = $conexao->prepare($sql)) {
         $stmt->bind_param("i", $id_usuario_selecionado);
