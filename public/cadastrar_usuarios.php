@@ -3,13 +3,13 @@
 include "../infra/conexao.php";
 
 
-$nome = $_POST["nome"];
+$nome_usuario = $_POST["nome_usuario"];
 $email = $_POST["email"];
 
-$sql = "INSERT INTO usuarios (nome,email) VALUES (?,?)";
+$sql = "INSERT INTO usuarios (nome_usuario,email) VALUES (?,?)";
 
 if($stmt = $conexao->prepare($sql)){
-    $stmt-> bind_param("ss", $nome, $email);
+    $stmt-> bind_param("ss", $nome_usuario, $email);
     $stmt->execute();
     $stmt->close();
 

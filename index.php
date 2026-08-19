@@ -2,9 +2,9 @@
 <?php
 
 include "infra/conexao.php";
-$sqlPratos = "SELECT pratos.*, usuarios.nome 
+$sqlPratos = "SELECT pratos.*, usuarios.nome_usuario 
               FROM pratos 
-              LEFT JOIN usuarios ON pratos.id = usuarios.id";
+              LEFT JOIN usuarios ON pratos.id_pratos = usuarios.id_usuario";
 $pratos = mysqli_query($conexao, $sqlPratos);
 
 $usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
@@ -27,8 +27,8 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
     <main>
         <h2>Adicione um novo Usuário!</h2>
         <form action="public/cadastrar_usuarios.php" method="POST">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" required>
+            <label for="nome_usuario">Nome:</label>
+            <input type="text" name="nome_usuario" required>
             <br>
             <label for="email">Email:</label>
             <input type="email" name="email" required>
@@ -38,18 +38,18 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
 
         <h2>Adicione um novo Prato!</h2>
         <form action="public/cadastrar_pratos.php" method="POST">
-            <label for="id">Usuário Responsável:</label>
-            <select name="id" id="id" required>
+            <label for="id_usuario">Usuário Responsável:</label>
+            <select name="id_usuario" id="id_usuario" required>
                 <option value="">Selecione um usuário...</option>
                 <?php while ($usuario = mysqli_fetch_assoc($usuarios)) { ?>
-                    <option value="<?php echo $usuario['id']; ?>">
-                        <?php echo $usuario['nome']; ?>
+                    <option value="<?php echo $usuario['id_usuario']; ?>">
+                        <?php echo $usuario['nome_usuario']; ?>
                     </option>
                 <?php } ?>
             </select>
             <br>
-            <label for="nomeprato">Nome:</label>
-            <input type="text" name="nomeprato" required>
+            <label for="nome_prato">Nome:</label>
+            <input type="text" name="nome_prato" required>
             <br>
             <label for="descricao">Descrição</label>
             <input type="text" name="descricao" required>
@@ -77,15 +77,15 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
                 </tr>
                 <?php while ($prato = mysqli_fetch_assoc($pratos)) { ?>
                     <tr>
-                        <td><?php echo $prato["nome"] ?? 'Sem usuário'; ?></td>
-                        <td><?php echo $prato["id"]; ?></td>
-                        <td><?php echo $prato["nome"]; ?></td>
+                        <td><?php echo $prato["nome_usuario"] ?? 'Sem usuário'; ?></td>
+                        <td><?php echo $prato["id_pratos"]; ?></td>
+                        <td><?php echo $prato["nome_prato"]; ?></td>
                         <td><?php echo $prato["descricao"]; ?></td>
                         <td><?php echo $prato["preco"]; ?></td>
                         <td><?php echo $prato["categoria"]; ?></td>
                         <td>
-                            <a href="public/editar.php?id=<?php echo $prato["id"]; ?>">Editar</a>
-                            <a href="public/excluir.php?id=<?php echo $prato["id"]; ?>">Excluir</a>
+                            <a href="public/editar.php?id=<?php echo $prato["id_pratos"]; ?>">Editar</a>
+                            <a href="public/excluir.php?id=<?php echo $prato["id_pratos"]; ?>">Excluir</a>
                         </td>
                     </tr>
                 <?php } ?>

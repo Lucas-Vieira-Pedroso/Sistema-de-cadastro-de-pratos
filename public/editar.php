@@ -2,10 +2,10 @@
 
 include "../infra/conexao.php";
 
-$id = $_GET["id"];
-$sql = "SELECT * FROM pratos WHERE id = ?";
+$id_pratos = $_GET["id_pratos"];
+$sql = "SELECT * FROM pratos WHERE id_pratos = ?";
 if ($stmt = $conexao->prepare($sql)) {
-    $stmt->bind_param("i", $id);
+    $stmt->bind_param("i", $id_pratos);
     $stmt->execute();
     $resultado = $stmt->get_result();
     $prato = mysqli_fetch_assoc($resultado);
@@ -32,13 +32,13 @@ if ($stmt = $conexao->prepare($sql)) {
     </header>
     <main>
         <h2>Editando o prato
-            <?php echo $prato["nome"] ?>!
+            <?php echo $prato["nome_prato"] ?>!
         </h2>
         <form action="atualizar.php" method="POST">
-            <input type="hidden" name="id" value="<?php echo $prato["id"] ?>">
+            <input type="hidden" name="id_pratos" value="<?php echo $prato["id"] ?>">
 
-            <label for="nome">Nome: </label>
-            <input type="text" name="nome" value="<?php echo $prato["nome"] ?>">
+            <label for="nome_prato">Nome: </label>
+            <input type="text" name="nome_prato" value="<?php echo $prato["nome_prato"] ?>">
             <br>
             <label for="descricao">Descrição: </label>
             <input type="text" name="descricao" value="<?php echo $prato["descricao"] ?>">
