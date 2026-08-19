@@ -27,8 +27,8 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
     <main>
         <h2>Adicione um novo Usuário!</h2>
         <form action="public/cadastrar_usuarios.php" method="POST">
-            <label for="nomeusuario">Nome:</label>
-            <input type="text" name="nomeusuario" required>
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" required>
             <br>
             <label for="email">Email:</label>
             <input type="email" name="email" required>
@@ -38,8 +38,8 @@ $usuarios = mysqli_query($conexao, "SELECT * FROM usuarios");
 
         <h2>Adicione um novo Prato!</h2>
         <form action="public/cadastrar_pratos.php" method="POST">
-            <label for="usuario_id">Usuário Responsável:</label>
-            <select name="usuario_id" id="usuario_id" required>
+            <label for="id">Usuário Responsável:</label>
+            <select name="id" id="id" required>
                 <option value="">Selecione um usuário...</option>
                 <?php while ($usuario = mysqli_fetch_assoc($usuarios)) { ?>
                     <option value="<?php echo $usuario['id']; ?>">
